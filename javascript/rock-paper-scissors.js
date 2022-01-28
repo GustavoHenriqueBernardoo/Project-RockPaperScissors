@@ -32,20 +32,16 @@ function rounds(playerSelection, computerSelection){
   const wonRock = 'You won! Rock beats Scissor';
   const loseToScissor = 'You lose! Scissor beats Paper';
   const wonScissor = 'You won! Scissor beats Paper';
-  switch(playerSelection, computerSelection){
-    case playerSelection === 'Rock' && computerSelection === 'Rock':
+  if(playerSelection === 'Rock' && computerSelection === 'Rock'){
       console.log('Tie!!!')
-      break;
-    case playerSelection === 'Scissor' && computerSelection === 'Scissor':
+  }else if (playerSelection === 'Scissor' && computerSelection === 'Scissor'){
+    console.log('Tie!!!')
+  }else if (playerSelection === 'Paper' && computerSelection === 'Paper'){
       console.log('Tie!!!')
-      break;
-    case playerSelection === 'Paper' && computerSelection === 'Paper':
-      console.log('Tie!!!')
-      break;
-    default:
-      console.log('WTF')
-      break;
   }
+
+
+
   if (playerSelection === 'Rock' && computerSelection === 'Paper'){
       return loseToPaper;
   } else if (playerSelection === 'Paper' && computerSelection === 'Rock'){
