@@ -73,21 +73,11 @@ function rounds(playerSelection, computerSelection){
 
 }
 
-// const playerSelection = prompt('Choose: Rock, Paper or Scissor'); 
-
-// const computerSelection = computerPlay();
-
-// console.log(rounds(playerSelection.toUpperCase(), computerSelection));
-// console.log('CPU score:'+ cpu, 'User score:'+ user)
 
 function game(){
   for (let i = 1; i <= 5 ; i++){
     const playerSelection = prompt('Choose: Rock, Paper or Scissor'); 
     playerSelectionUpper = playerSelection.toUpperCase();
-    // if(playerSelectionUpper != rockPaperScissor[0] || playerSelectionUpper !== rockPaperScissor[1] || playerSelectionUpper !== rockPaperScissor[2]){
-    //   console.log('WTF');
-    //   continue;
-    // }
     const computerSelection = computerPlay();
     console.log('Round:'+ i);
     rounds();
@@ -97,9 +87,7 @@ function game(){
   }
 }
 game();
-
-// function computerPlay(){
-//   return console.log(rockPaperScissor.mathrandom());
+// if(playerSelectionUpper != rockPaperScissor[0] || playerSelectionUpper !== rockPaperScissor[1] || playerSelectionUpper !== rockPaperScissor[2]){
+//   console.log('WTF');
+//   continue;
 // }
-
-// computerPlay();
