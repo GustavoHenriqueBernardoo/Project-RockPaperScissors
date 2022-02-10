@@ -1,0 +1,25 @@
+.container .card .title{
+  border: 5px solid black;
+  padding: 5px;
+  margin: 5px;
+  
+}
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  border: 5px solid black;
+
+}
+.card{
+  font-size: 20px;
+}
+.title{
+  justify-content: center;
+}
+.player-selection{
+  border: 5px solid black;
+  padding: 5px;
+  margin: 5px;
+}

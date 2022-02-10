@@ -21,32 +21,28 @@
 const rockPaperScissor = ['ROCK', 'PAPER', 'SCISSOR'];
 let cpu = 0;
 let user = 0;
-// console.log(rockPaperScissor);
+
+// Setting a random number to the computer
 let numRandom = Math.random(1);
 let x = Math.floor(numRandom * rockPaperScissor.length);
 
 function computerPlay(){
   return rockPaperScissor[x]
 }
-// console.log(computerPlay());
+
+// Win or Lose variables
+const loseToPaper = 'You lose! Paper beats Rock',
+      wonPaper = 'You won! Paper beats Rock',
+      loseToRock = 'You lose! Rock beats Scissor',
+      wonRock = 'You won! Rock beats Scissor',
+      loseToScissor = 'You lose! Scissor beats Paper',
+      wonScissor = 'You won! Scissor beats Paper';
 
 function rounds(playerSelection, computerSelection){
-  const loseToPaper = 'You lose! Paper beats Rock';
-  const wonPaper = 'You won! Paper beats Rock';
-  const loseToRock = 'You lose! Rock beats Scissor';
-  const wonRock = 'You won! Rock beats Scissor';
-  const loseToScissor = 'You lose! Scissor beats Paper';
-  const wonScissor = 'You won! Scissor beats Paper';
-  if(playerSelection === 'ROCK' && computerSelection === 'ROCK'){
-      console.log('Tie!!!')
-  }else if (playerSelection === 'SCISSOR' && computerSelection === 'SCISSOR'){
-    console.log('Tie!!!')
-  }else if (playerSelection === 'PAPER' && computerSelection === 'PAPER'){
+  
+  if(playerSelection === computerSelection  ){
       console.log('Tie!!!')
   }
-
-
-
   if (playerSelection === 'ROCK' && computerSelection === 'PAPER'){
     cpu++;
     return loseToPaper;
@@ -66,27 +62,50 @@ function rounds(playerSelection, computerSelection){
     user++;
     return wonScissor;
   } 
-  // else {
-  //   console.log('You type it something else, please try again.') 
-  // }
-  // return loseToPaper;
-
 }
 
+// Buttons and Selectors
+const paperBtn = document.createElement('button'),
+      rockBtn = document.createElement('button'),
+      scissorBtn = document.createElement('button'),
+      body = document.querySelector('body'),
+      messageUI = document.createElement('p'),
+      playerSelectionUI = document.querySelector('#player-selector');
 
-function game(){
-  for (let i = 1; i <= 5 ; i++){
-    const playerSelection = prompt('Choose: Rock, Paper or Scissor'); 
-    playerSelectionUpper = playerSelection.toUpperCase();
-    const computerSelection = computerPlay();
-    console.log('Round:'+ i);
-    rounds();
-    console.log(rounds(playerSelectionUpper, computerSelection));
-    console.log('CPU score:'+ cpu, 'User score:'+ user)
+// Add class buttons
+paperBtn.className = 'paper player-button';
+rockBtn.className = 'rock player-button';
+scissorBtn.className = 'scissor player-button';
+paperBtn.textContent = 'Paper';
+rockBtn.textContent = 'Rock';
+scissorBtn.textContent = 'Scissor';
+
+// Create a div
+const div = document.createElement('div');
+
+// Append into the page
+div.appendChild(paperBtn);
+div.appendChild(rockBtn);
+div.appendChild(scissorBtn);
+console.log(messageUI)
+console.log(playerSelectionUI)
+// playerSelectionUI.appendChild(div);
+
+
+
+// function game(){
+//   for (let i = 1; i <= 5 ; i++){
+//     const playerSelection = prompt('Choose: Rock, Paper or Scissor'); 
+//     playerSelectionUpper = playerSelection.toUpperCase();
+//     const computerSelection = computerPlay();
+//     console.log('Round:'+ i);
+//     rounds();
+//     console.log(rounds(playerSelectionUpper, computerSelection));
+//     console.log('CPU score:'+ cpu, 'User score:'+ user)
     
-  }
-}
-game();
+//   }
+// }
+// game();
 // if(playerSelectionUpper != rockPaperScissor[0] || playerSelectionUpper !== rockPaperScissor[1] || playerSelectionUpper !== rockPaperScissor[2]){
 //   console.log('WTF');
 //   continue;
