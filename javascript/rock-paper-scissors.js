@@ -13,7 +13,7 @@ GAME FUNCTION:
 
 */
 
-
+// Define Vars
 const rockPaperScissor = ['ROCK', 'PAPER', 'SCISSOR'];
 let cpu = 0;
 let user = 0;
@@ -44,21 +44,26 @@ playerSelectionUI = document.querySelector('#player'),
 body = document.querySelector('body'),
 messageUI = document.createElement('p');
 playerMessageUI = document.createElement('p')
+playAgain = document.createElement('button')
 
 // Add class buttons
 rockBtn.className = 'rock player-button';
 paperBtn.className = 'paper player-button';
 scissorBtn.className = 'scissor player-button';
+playAgain.className = 'player-button'
+messageUI.className = 'messageUI'
 
 // CSS Properties
 messageUI.style.textAlign = 'center';
 messageUI.style.color = 'red';
+playAgain.style.display = 'none';
 // Text content
 rockBtn.textContent = 'Rock';
 paperBtn.textContent = 'Paper';
 scissorBtn.textContent = 'Scissor';
+playAgain.textContent = 'Play Again';
 messageUI.textContent = '';
-playerMessageUI.textContent = 'Please choose between Rock, Paper and Scissor'
+playerMessageUI.textContent = 'Please choose between Paper, Rock and Scissor'
 
 
 // Create a div
@@ -68,6 +73,7 @@ const div = document.createElement('div');
 div.appendChild(paperBtn);
 div.appendChild(rockBtn);
 div.appendChild(scissorBtn);
+div.appendChild(playAgain);
 card.insertBefore(messageUI, playerSelectionUI);
 playerSelectionUI.appendChild(div);
 div.appendChild(playerMessageUI);
@@ -82,26 +88,40 @@ function playRounds(playerSelection, computerSelection){
 
   }
   if (playerSelection === 'ROCK' && computerSelection === 'PAPER'){
-    // cpu++;
-    game(false, `${loseToPaper} \n Score: User(${user}) X CPU(${cpu}) \n Rounds Left:${roundLeft}`);
+    
+    game(false, 
+    `${loseToPaper}
+    Score: User(${user}) X CPU(${cpu})
+    Rounds Left:${roundLeft}`);
+
   } else if (playerSelection === 'PAPER' && computerSelection === 'ROCK'){
     // user++;
-    game(true, `${wonPaper}`);
+    game(true, `${wonPaper}
+    Score: User(${user}) X CPU(${cpu})
+    Rounds Left:${roundLeft}`);
   } else if (playerSelection === 'SCISSOR' && computerSelection === 'ROCK'){
     // cpu++;
-    game(false, `${loseToRock}`);
+    game(false, `${loseToRock}
+    Score: User(${user}) X CPU(${cpu})
+    Rounds Left:${roundLeft}`);
   } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSOR'){
     // user++;
-    game(true, `${wonRock}`);
+    game(true, `${wonRock}
+    Score: User(${user}) X CPU(${cpu})
+    Rounds Left:${roundLeft}`);
   } else if (playerSelection === 'PAPER' && computerSelection === 'SCISSOR'){
     // cpu++;
-    game(false, `${loseToScissor}`);
+    game(false, `${loseToScissor}
+    Score: User(${user}) X CPU(${cpu})
+    Rounds Left:${roundLeft}`);
   } else if (playerSelection === 'SCISSOR' && computerSelection === 'PAPER'){
     // user++;
-    game(true, `${wonScissor}`);
+    game(true, `${wonScissor}
+    Score: User(${user}) X CPU(${cpu})
+    Rounds Left:${roundLeft}`);
   } 
 }
-// test
+// Event Listeners
 paperBtn.addEventListener('mousedown', function(){
   gameStart('PAPER')
 });
@@ -111,6 +131,10 @@ rockBtn.addEventListener('mousedown', function(){
 scissorBtn.addEventListener('mousedown', function(){
   gameStart('SCISSOR')
 });
+// Play again Event Listener
+playAgain.addEventListener('click', function(){
+  window.location.reload();
+})
 
 // set a game function
 function game (win, msg){
@@ -123,55 +147,49 @@ function game (win, msg){
     cpu++
     roundLeft--
     console.log(`Score: User(${user}) X CPU(${cpu})`)
-
   }
-
   //set message
   setMessage(msg)
-
 }
-// gameStart
+
+// gameStart function
 function gameStart(playerSelection){
   computerSelection = computerPlay();
   console.log(playerSelection, computerPlay());
   if(roundLeft > 0){
     playRounds(playerSelection, computerSelection);
   }else if(roundLeft === 0){
-    setMessage(`The game finished!`)
-  }
-  
-  
-}
+    if(user > cpu){
+      setMessage(`The game finished! Congratulations!!! YOU WON
+      ||CPU:${cpu}||User:${user}`)
 
+      // removing the buttons
+      paperBtn.style.display = 'none';
+      rockBtn.style.display = 'none';
+      scissorBtn.style.display = 'none';
+      // Option to play again
+      playAgain.style.display = 'inline-block'
+      // Change the message to user play again
+      playerMessageUI.textContent = 'Wanna play again?'
+
+
+    }else{
+      setMessage(`The game finished! CPU WON
+      ||CPU:${cpu}||User:${user}`)
+
+      // removing the buttons
+      paperBtn.style.display = 'none';
+      rockBtn.style.display = 'none';
+      scissorBtn.style.display = 'none';
+      // Option to play again
+      playAgain.style.display = 'inline-block'
+      // Change the message to user play again
+      playerMessageUI.textContent = 'Wanna play again?'
+
+    }
+  }
+}
 // set message
 function setMessage(msg){
   messageUI.textContent = msg;
 }
-
-
-// paperBtn.addEventListener('mousedown', function(e){
-//   playerSelection = rockPaperScissor[1]
-//   console.log(playerSelection)
-//   return playerSelection
-// })
-
-// Player choosing
-
-
-// function game(){
-//   for (let i = 1; i <= 5 ; i++){
-//     const playerSelection = prompt('Choose: Rock, Paper or Scissor'); 
-//     playerSelectionUpper = playerSelection.toUpperCase();
-//     const computerSelection = computerPlay();
-//     console.log('Round:'+ i);
-//     rounds();
-//     console.log(rounds(playerSelectionUpper, computerSelection));
-//     console.log('CPU score:'+ cpu, 'User score:'+ user)
-    
-//   }
-// }
-// game();
-// if(playerSelectionUpper != rockPaperScissor[0] || playerSelectionUpper !== rockPaperScissor[1] || playerSelectionUpper !== rockPaperScissor[2]){
-//   console.log('WTF');
-//   continue;
-// }
