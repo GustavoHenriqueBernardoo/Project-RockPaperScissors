@@ -14,12 +14,17 @@
 }
 .card{
   font-size: 20px;
+  border: 5px solid black;
+  
 }
 .title{
   justify-content: center;
 }
-.player-selection{
+#player{
   border: 5px solid black;
   padding: 5px;
   margin: 5px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }

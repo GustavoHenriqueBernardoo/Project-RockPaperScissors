@@ -1,32 +1,28 @@
-// My game is going to play against a computer.
-// The computer has to randomly choose between rock, paper or scissors
-// And the player choose, after the two sides pick their option, compare who won and show a message
-
 /* 
-1 - computer select 
-2 - user select
-3 - if statement to compare and see who won
-  3.1 -  if user = rock and computer = paper: Computer won
-    put +1 score to CPU
-  3.2 -  if user = rock and computer = scissor: user won
-    put +1 score to user
-  3.3 -  if user = paper and computer = scissor: computer won
-    put +1 score to CPU
 
-4 - display who won
-5 - repeat the process in total five times
+GAME FUNCTION:
+- make the player select between rock, paper, and scissor
+- the CPU choose randomly
+- after the player select, show in the screen what he chooses, and what CPU choose
+- show who Won and who loses
+- show the score of each player
+- show the round count
+- if is a tie, do not count that round
+- The max number of rounds is 5
+- The first player that reaches 3 victories, won the game
+
 */
 
 
 const rockPaperScissor = ['ROCK', 'PAPER', 'SCISSOR'];
 let cpu = 0;
 let user = 0;
+let roundLeft = 5;
 
 // Setting a random number to the computer
-let numRandom = Math.random(1);
-let x = Math.floor(numRandom * rockPaperScissor.length);
-
 function computerPlay(){
+  let numRandom = Math.random();
+  let x = Math.floor(numRandom * rockPaperScissor.length);
   return rockPaperScissor[x]
 }
 
@@ -38,47 +34,32 @@ const loseToPaper = 'You lose! Paper beats Rock',
       loseToScissor = 'You lose! Scissor beats Paper',
       wonScissor = 'You won! Scissor beats Paper';
 
-function rounds(playerSelection, computerSelection){
-  
-  if(playerSelection === computerSelection  ){
-      console.log('Tie!!!')
-  }
-  if (playerSelection === 'ROCK' && computerSelection === 'PAPER'){
-    cpu++;
-    return loseToPaper;
-  } else if (playerSelection === 'PAPER' && computerSelection === 'ROCK'){
-    user++;
-    return wonPaper;
-  } else if (playerSelection === 'SCISSOR' && computerSelection === 'ROCK'){
-    cpu++;
-    return loseToRock;
-  } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSOR'){
-    user++;
-    return wonRock;
-  } else if (playerSelection === 'PAPER' && computerSelection === 'SCISSOR'){
-    cpu++;
-    return loseToScissor;
-  } else if (playerSelection === 'SCISSOR' && computerSelection === 'PAPER'){
-    user++;
-    return wonScissor;
-  } 
-}
-
-// Buttons and Selectors
-const paperBtn = document.createElement('button'),
-      rockBtn = document.createElement('button'),
-      scissorBtn = document.createElement('button'),
-      body = document.querySelector('body'),
-      messageUI = document.createElement('p'),
-      playerSelectionUI = document.querySelector('#player-selector');
+// Define UI Vars
+const rockBtn = document.createElement('button'),
+paperBtn = document.createElement('button'),
+scissorBtn = document.createElement('button'),
+container = document.querySelector('.container')
+card = document.querySelector('.card'),
+playerSelectionUI = document.querySelector('#player'),
+body = document.querySelector('body'),
+messageUI = document.createElement('p');
+playerMessageUI = document.createElement('p')
 
 // Add class buttons
-paperBtn.className = 'paper player-button';
 rockBtn.className = 'rock player-button';
+paperBtn.className = 'paper player-button';
 scissorBtn.className = 'scissor player-button';
-paperBtn.textContent = 'Paper';
+
+// CSS Properties
+messageUI.style.textAlign = 'center';
+messageUI.style.color = 'red';
+// Text content
 rockBtn.textContent = 'Rock';
+paperBtn.textContent = 'Paper';
 scissorBtn.textContent = 'Scissor';
+messageUI.textContent = '';
+playerMessageUI.textContent = 'Please choose between Rock, Paper and Scissor'
+
 
 // Create a div
 const div = document.createElement('div');
@@ -87,10 +68,94 @@ const div = document.createElement('div');
 div.appendChild(paperBtn);
 div.appendChild(rockBtn);
 div.appendChild(scissorBtn);
-console.log(messageUI)
-console.log(playerSelectionUI)
-// playerSelectionUI.appendChild(div);
+card.insertBefore(messageUI, playerSelectionUI);
+playerSelectionUI.appendChild(div);
+div.appendChild(playerMessageUI);
 
+
+// Making the logic of who win
+function playRounds(playerSelection, computerSelection){
+
+
+  if(playerSelection === computerSelection){
+      setMessage(`${playerSelection} X ${computerSelection} is a TIE!`)
+
+  }
+  if (playerSelection === 'ROCK' && computerSelection === 'PAPER'){
+    // cpu++;
+    game(false, `${loseToPaper} \n Score: User(${user}) X CPU(${cpu}) \n Rounds Left:${roundLeft}`);
+  } else if (playerSelection === 'PAPER' && computerSelection === 'ROCK'){
+    // user++;
+    game(true, `${wonPaper}`);
+  } else if (playerSelection === 'SCISSOR' && computerSelection === 'ROCK'){
+    // cpu++;
+    game(false, `${loseToRock}`);
+  } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSOR'){
+    // user++;
+    game(true, `${wonRock}`);
+  } else if (playerSelection === 'PAPER' && computerSelection === 'SCISSOR'){
+    // cpu++;
+    game(false, `${loseToScissor}`);
+  } else if (playerSelection === 'SCISSOR' && computerSelection === 'PAPER'){
+    // user++;
+    game(true, `${wonScissor}`);
+  } 
+}
+// test
+paperBtn.addEventListener('mousedown', function(){
+  gameStart('PAPER')
+});
+rockBtn.addEventListener('mousedown', function(){
+  gameStart('ROCK')
+});
+scissorBtn.addEventListener('mousedown', function(){
+  gameStart('SCISSOR')
+});
+
+// set a game function
+function game (win, msg){
+
+  if (win === true){
+    user++
+    roundLeft--
+    console.log(`Score: User(${user}) X CPU(${cpu})`)
+  }else{
+    cpu++
+    roundLeft--
+    console.log(`Score: User(${user}) X CPU(${cpu})`)
+
+  }
+
+  //set message
+  setMessage(msg)
+
+}
+// gameStart
+function gameStart(playerSelection){
+  computerSelection = computerPlay();
+  console.log(playerSelection, computerPlay());
+  if(roundLeft > 0){
+    playRounds(playerSelection, computerSelection);
+  }else if(roundLeft === 0){
+    setMessage(`The game finished!`)
+  }
+  
+  
+}
+
+// set message
+function setMessage(msg){
+  messageUI.textContent = msg;
+}
+
+
+// paperBtn.addEventListener('mousedown', function(e){
+//   playerSelection = rockPaperScissor[1]
+//   console.log(playerSelection)
+//   return playerSelection
+// })
+
+// Player choosing
 
 
 // function game(){
