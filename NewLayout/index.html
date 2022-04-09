@@ -7,28 +7,35 @@
     <title>Document</title>
   </head>
   <body>
-    <h2 class="title">Rock Paper and Scissor</h2>
+    <div class="header">
+      <div class="scoreboard">
+        <p class="player-score">Player: 1</p>
+        X
+        <p class="cpu-score">CPU: 2</p>
+      </div>
+      <h2 class="title">Rock Paper and Scissor</h2>
+    </div>
     <div class="container">
       <div class="card">
-        <p class="messageUI">PAPER X PAPER is a TIE!</p>
+        <p class="messageUI result">PAPER X PAPER is a TIE!</p>
       </div>
       <div class="game-section">
         <div id="player" class="player">
-          <div class="rock">
+          <div class="btn rock">
             <p>Rock</p>
             <img src="../img/rock.png" alt="" />
           </div>
-          <div class="paper">
+          <div class="btn paper">
             <p>Paper</p>
             <img src="../img/paper.png" alt="" />
           </div>
-          <div class="scissor">
+          <div class="btn scissor">
             <p>Scissor</p>
             <img src="../img/scissor.png" alt="" />
           </div>
         </div>
 
-        <div id="cpu" class="cpu">
+        <!-- <div id="cpu" class="cpu">
           <div class="rock">
             <p>Rock</p>
             <img src="../img/rock.png" alt="" />
@@ -41,10 +48,12 @@
             <p>Scissor</p>
             <img src="../img/scissor.png" alt="" />
           </div>
-        </div>
+        </div> -->
       </div>
       <p class="messageUI">Please choose between Paper, Rock and Scissor</p>
     </div>
+
+    <footer class="footer">&copy; Gustavo Bernardo</footer>
     <link rel="stylesheet" href="./style.css" />
     <script src="./javascript/rock-paper-scissors.js"></script>
   </body>
