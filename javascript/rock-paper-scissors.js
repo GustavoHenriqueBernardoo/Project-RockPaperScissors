@@ -13,43 +13,25 @@ GAME FUNCTION:
 
 */
 
-// Define Vars
-const rockPaperScissor = ['ROCK', 'PAPER', 'SCISSOR'];
-let cpu = 0;
-let user = 0;
-let roundLeft = 5;
 
-// Setting a random number to the computer
-function computerPlay(){
-  let numRandom = Math.random();
-  let x = Math.floor(numRandom * rockPaperScissor.length);
-  return rockPaperScissor[x]
-}
 
-// Win or Lose variables
-const loseToPaper = 'You lose! Paper beats Rock',
-      wonPaper = 'You won! Paper beats Rock',
-      loseToRock = 'You lose! Rock beats Scissor',
-      wonRock = 'You won! Rock beats Scissor',
-      loseToScissor = 'You lose! Scissor beats Paper',
-      wonScissor = 'You won! Scissor beats Paper';
-
+/*
 // Define UI Vars
 const rockBtn = document.createElement('button'),
 paperBtn = document.createElement('button'),
 scissorBtn = document.createElement('button'),
 container = document.querySelector('.container')
 card = document.querySelector('.card'),
-playerSelectionUI = document.querySelector('#player'),
-body = document.querySelector('body'),
-messageUI = document.createElement('p');
-playerMessageUI = document.createElement('p')
+  playerSelectionUI = document.querySelector('#player'),
+  body = document.querySelector('body'),
+  messageUI = document.createElement('p'),
+  playerMessageUI = document.createElement('p')
 playAgain = document.createElement('button')
 
 // Add class buttons
-rockBtn.className = 'rock player-button';
-paperBtn.className = 'paper player-button';
-scissorBtn.className = 'scissor player-button';
+rockBtn.className = 'rock player-button'
+paperBtn.className = 'paper player-button'
+scissorBtn.className = 'scissor player-button'
 playAgain.className = 'player-button'
 messageUI.className = 'messageUI'
 
@@ -78,74 +60,107 @@ card.insertBefore(messageUI, playerSelectionUI);
 playerSelectionUI.appendChild(div);
 div.appendChild(playerMessageUI);
 
+*/
+
+// Define Vars
+const rockPaperScissor = ['ROCK', 'PAPER', 'SCISSOR'];
+let cpu = 0;
+let user = 0;
+let roundLeft = 5;
+
+// Setting a random number to the computer
+function computerPlay() {
+  let numRandom = Math.random();
+  let x = Math.floor(numRandom * rockPaperScissor.length);
+  return rockPaperScissor[x]
+}
+
+// Define UI vars
+const containerUI = document.querySelector('.container')
+const cardUI = document.querySelector('.card')
+const rockBtn = document.querySelector('.rock')
+const paperBtn = document.querySelector('.paper')
+const scissorBtn = document.querySelector('.scissor')
+const scoreBoard = document.querySelector('.scoreboard')
+const resultUI = document.querySelector('.result')
+const messageChoose = document.querySelector('.choose')
+const playerScore = document.querySelector('.player-score')
+const cpuScore = document.querySelector('.cpu-score')
+
+playAgain = document.createElement('button')
+playAgain.classList.add('play-again')
+playAgain.style.display = 'none'
+playAgain.textContent = 'Play Again'
+containerUI.insertAdjacentElement("beforeend", playAgain)
+
+
+
+
+// Win or Lose variables
+const loseToPaper = 'You lose! Paper beats Rock',
+  wonPaper = 'You won! Paper beats Rock',
+  loseToRock = 'You lose! Rock beats Scissor',
+  wonRock = 'You won! Rock beats Scissor',
+  loseToScissor = 'You lose! Scissor beats Paper',
+  wonScissor = 'You won! Scissor beats Paper';
 
 // Making the logic of who win
-function playRounds(playerSelection, computerSelection){
+function playRounds(playerSelection, computerSelection) {
 
 
-  if(playerSelection === computerSelection){
-      setMessage(`${playerSelection} X ${computerSelection} is a TIE!`)
+  if (playerSelection === computerSelection) {
+    setMessage(`${playerSelection} X ${computerSelection} is a TIE!`)
 
   }
-  if (playerSelection === 'ROCK' && computerSelection === 'PAPER'){
-    
-    game(false, 
-    `${loseToPaper}
-    Score: User(${user}) X CPU(${cpu})
-    Rounds Left:${roundLeft}`);
+  if (playerSelection === 'ROCK' && computerSelection === 'PAPER') {
 
-  } else if (playerSelection === 'PAPER' && computerSelection === 'ROCK'){
+    game(false, `${loseToPaper}`)
+
+  } else if (playerSelection === 'PAPER' && computerSelection === 'ROCK') {
     // user++;
-    game(true, `${wonPaper}
-    Score: User(${user}) X CPU(${cpu})
-    Rounds Left:${roundLeft}`);
-  } else if (playerSelection === 'SCISSOR' && computerSelection === 'ROCK'){
+    game(true, `${wonPaper}`)
+  } else if (playerSelection === 'SCISSOR' && computerSelection === 'ROCK') {
     // cpu++;
-    game(false, `${loseToRock}
-    Score: User(${user}) X CPU(${cpu})
-    Rounds Left:${roundLeft}`);
-  } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSOR'){
+    game(false, `${loseToRock}`);
+  } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSOR') {
     // user++;
-    game(true, `${wonRock}
-    Score: User(${user}) X CPU(${cpu})
-    Rounds Left:${roundLeft}`);
-  } else if (playerSelection === 'PAPER' && computerSelection === 'SCISSOR'){
+    game(true, `${wonRock}`);
+  } else if (playerSelection === 'PAPER' && computerSelection === 'SCISSOR') {
     // cpu++;
-    game(false, `${loseToScissor}
-    Score: User(${user}) X CPU(${cpu})
-    Rounds Left:${roundLeft}`);
-  } else if (playerSelection === 'SCISSOR' && computerSelection === 'PAPER'){
+    game(false, `${loseToScissor}`);
+  } else if (playerSelection === 'SCISSOR' && computerSelection === 'PAPER') {
     // user++;
-    game(true, `${wonScissor}
-    Score: User(${user}) X CPU(${cpu})
-    Rounds Left:${roundLeft}`);
-  } 
+    game(true, `${wonScissor}`);
+  }
 }
 // Event Listeners
-paperBtn.addEventListener('mousedown', function(){
+paperBtn.addEventListener('mousedown', function () {
   gameStart('PAPER')
 });
-rockBtn.addEventListener('mousedown', function(){
+rockBtn.addEventListener('mousedown', function () {
   gameStart('ROCK')
 });
-scissorBtn.addEventListener('mousedown', function(){
+scissorBtn.addEventListener('mousedown', function () {
   gameStart('SCISSOR')
 });
 // Play again Event Listener
-playAgain.addEventListener('click', function(){
+playAgain.addEventListener('click', function () {
   window.location.reload();
 })
 
 // set a game function
-function game (win, msg){
+function game(win, msg) {
 
-  if (win === true){
+  if (win === true) {
     user++
     roundLeft--
-    console.log(`Score: User(${user}) X CPU(${cpu})`)
-  }else{
+    playerScore.textContent = `User: ${user}`
+  } else {
+
     cpu++
     roundLeft--
+    cpuScore.textContent = `CPU: ${cpu}`
+
     console.log(`Score: User(${user}) X CPU(${cpu})`)
   }
   //set message
@@ -153,15 +168,16 @@ function game (win, msg){
 }
 
 // gameStart function
-function gameStart(playerSelection){
+function gameStart(playerSelection) {
   computerSelection = computerPlay();
-  console.log(playerSelection, computerPlay());
-  if(roundLeft > 0){
+  messageChoose.classList.add('hidden')
+  scoreBoard.classList.remove('hidden')
+  // console.log(playerSelection, computerPlay());
+  if (roundLeft > 0) {
     playRounds(playerSelection, computerSelection);
-  }else if(roundLeft === 0){
-    if(user > cpu){
-      setMessage(`The game finished! Congratulations!!! YOU WON
-      ||CPU:${cpu}||User:${user}`)
+  } else if (roundLeft === 0) {
+    if (user > cpu) {
+      setMessage(`The game finished! Congratulations!!! YOU WON`)
 
       // removing the buttons
       paperBtn.style.display = 'none';
@@ -170,12 +186,12 @@ function gameStart(playerSelection){
       // Option to play again
       playAgain.style.display = 'inline-block'
       // Change the message to user play again
-      playerMessageUI.textContent = 'Wanna play again?'
+      messageChoose.classList.remove('hidden')
+      messageChoose.textContent = 'Wanna play again?'
 
 
-    }else{
-      setMessage(`The game finished! CPU WON
-      ||CPU:${cpu}||User:${user}`)
+    } else {
+      setMessage(`The game finished! Sorry, CPU WON`)
 
       // removing the buttons
       paperBtn.style.display = 'none';
@@ -184,12 +200,19 @@ function gameStart(playerSelection){
       // Option to play again
       playAgain.style.display = 'inline-block'
       // Change the message to user play again
-      playerMessageUI.textContent = 'Wanna play again?'
+      messageChoose.classList.remove('hidden')
+      messageChoose.textContent = 'Wanna play again?'
 
     }
   }
 }
 // set message
-function setMessage(msg){
-  messageUI.textContent = msg;
+function setMessage(msg) {
+  resultUI.classList.remove('hidden')
+  resultUI.textContent = msg;
 }
+
+// function setScore(msg) {
+//   scoreBoard.classList.remove('hidden')
+//   scoreBoard.textContent = msg
+// }

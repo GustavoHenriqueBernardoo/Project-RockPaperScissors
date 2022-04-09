@@ -1,22 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div class="container">
-    <div class="card">
-      <h2 class="title"> Rock Paper and Scissor </h2>
-        <div id="player">
-          
-        </div>
-    </div>
-  </div>    
-    <link rel="stylesheet" href="./css/style.css">
-    <script src="./javascript/rock-paper-scissors.js">    </script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
 
-</body>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="scoreboard hidden">
+        <p class="player-score">User: 0</p>
+        X
+        <p class="cpu-score">CPU: 0</p>
+      </div>
+      <h2 class="title">Rock Paper and Scissor</h2>
+    </div>
+    <div class="container">
+      <div class="card">
+        <p class="messageUI result hidden">PAPER X PAPER is a TIE!</p>
+      </div>
+      <div class="game-section">
+        <div id="player" class="player">
+          <div class="btn rock">
+            <p>Rock</p>
+            <img src="../img/rock.png" alt="" />
+          </div>
+          <div class="btn paper">
+            <p>Paper</p>
+            <img src="../img/paper.png" alt="" />
+          </div>
+          <div class="btn scissor">
+            <p>Scissor</p>
+            <img src="../img/scissor.png" alt="" />
+          </div>
+        </div>
+
+        <!-- <div id="cpu" class="cpu">
+          <div class="rock">
+            <p>Rock</p>
+            <img src="../img/rock.png" alt="" />
+          </div>
+          <div class="paper">
+            <p>Paper</p>
+            <img src="../img/paper.png" alt="" />
+          </div>
+          <div class="scissor">
+            <p>Scissor</p>
+            <img src="../img/scissor.png" alt="" />
+          </div>
+        </div> -->
+      </div>
+      <p class="messageUI choose">
+        Please choose between Paper, Rock and Scissor
+      </p>
+    </div>
+
+    <footer class="footer">&copy; Gustavo Bernardo</footer>
+    <script src="./javascript/rock-paper-scissors.js"></script>
+  </body>
 </html>
